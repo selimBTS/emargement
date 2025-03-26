@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audit Global - Projet EMARGEMENT</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #F1F3F5;
+      margin: 0;
+      padding: 2rem;
+      color: #212529;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #E85421;
+    }
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: #FFFFFF;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .card h2 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: #0E1E5B;
+    }
+    .card ul {
+      padding-left: 1rem;
+    }
+    .card ul li {
+      margin-bottom: 0.5rem;
+    }
+    .positive { color: #2ECC71; }
+    .negative { color: #E74C3C; }
+    .neutral { color: #3498DB; }
+  </style>
+</head>
+<body>
+  <h1>Audit Global du Projet EMARGEMENT</h1>
+  <div class="dashboard">
+    <div class="card">
+      <h2>✔ Points Positifs</h2>
+      <ul>
+        <li class="positive">Structure modulaire claire (auth, admin, php...)</li>
+        <li class="positive">Utilisation de Composer pour les dépendances PHP</li>
+        <li class="positive">README clair et bien structuré</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>🔒 Sécurité</h2>
+      <ul>
+        <li class="negative">Hachage sécurisé des mots de passe à vérifier (ex: bcrypt)</li>
+        <li class="negative">Validation côté serveur des entrées utilisateur</li>
+        <li class="negative">Sécurisation des sessions et prévention XSS/SQLi</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>🧠 Organisation & Code</h2>
+      <ul>
+        <li class="neutral">Regrouper les fichiers CSS/JS dans des dossiers dédiés</li>
+        <li class="neutral">Utiliser un routeur pour les pages PHP</li>
+        <li class="neutral">Uniformiser le nommage et suivre les normes PSR</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>🧪 Tests & Maintenance</h2>
+      <ul>
+        <li class="negative">Manque de tests unitaires</li>
+        <li class="neutral">Meilleure gestion des erreurs (exceptions centralisées)</li>
+        <li class="neutral">Ajouter un .gitignore pour ignorer les fichiers systèmes</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>📚 Documentation</h2>
+      <ul>
+        <li class="positive">README présent</li>
+        <li class="neutral">Ajouter une documentation par module</li>
+        <li class="neutral">Lister les dépendances, accès BDD, structure</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
