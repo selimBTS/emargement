@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Projet d'Émargement Web
 
 
@@ -71,3 +72,6 @@ Sur macOS / Linux
     
 
 
+=======
+# emargement
+>>>>>>> 9fd597990fbe1f1d46fb5577a49356a848058f93
