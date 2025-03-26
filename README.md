@@ -79,6 +79,13 @@ projet-emargement/
 
 ---
 
+## 🎨 Maquette Figma
+
+Le design de l'interface a été conçu avec Figma :  
+👉 [Voir la maquette](https://www.figma.com/design/rljuchhQ7rZN6gcvg2awzh/site-feuille-d'%C3%A9margement?node-id=0-1&t=H0lwOpRw9SRAoGJ1-1)
+
+---
+
 ## 👨‍💻 Auteur
 
 Projet développé par **Selim** — BTS SIO SLAM 2025  
