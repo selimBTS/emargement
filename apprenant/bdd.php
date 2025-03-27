@@ -2,7 +2,7 @@
 $host = 'localhost';
 $dbname = 'emargement';
 $username = 'root';
-$password = 'root'; // ou '' selon config MAMP
+$password = ''; // mot de passe vide pour XAMPP
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);

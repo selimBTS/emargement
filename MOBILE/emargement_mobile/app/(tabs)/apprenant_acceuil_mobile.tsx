@@ -7,7 +7,8 @@ export default function AcceuilApprenantMobile() {
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.avatar}><Text style={styles.avatarText}>AK</Text></View>
-        <Image source={require('../assets/gefor-logo.png')} style={styles.logo} />
+        <Image source={require('../../assets/images/gefor-logo.png')} style={styles.logo} />
+       
       </View>
 
       <View style={styles.rowBetween}>
@@ -53,6 +54,7 @@ export default function AcceuilApprenantMobile() {
         <TouchableOpacity><Text style={styles.footerItem}>👤\nProfil</Text></TouchableOpacity>
       </View>
     </View>
+    console.log
   );
 }
 
