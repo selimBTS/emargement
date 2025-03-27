@@ -137,7 +137,7 @@ if ($user_id) {
 <body>
   <div class="container">
     <header>
-      <div class="avatar">AK</div>
+    <div class="avatar"><?= htmlspecialchars($user_initials ?? '') ?></div>
       <img id="gefor" src="../image/gefor.jpg" alt="Logo Gefor" class="logo">
     </header>
 
@@ -155,6 +155,7 @@ if ($user_id) {
       <a href="http://localhost/myproject/emargement/php/dashboard_apprenant_process.php">🏠<br>Accueil</a>
       <a href="../apprenant/apprenant_calendrier.php">📅<br>Calendrier</a>
       <a href="../apprenant/apprenant_profil.php">👤<br>Profil</a>
+      <a href="../php/logout.php">🚪<br>Déconnexion</a>
     </footer>
   </div>
 

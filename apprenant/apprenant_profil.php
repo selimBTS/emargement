@@ -2,13 +2,17 @@
 session_start();
 require_once __DIR__ . '/../config.php';
 
-$_SESSION['user_id'] = 9; // à remplacer par la session réelle
-$user_id = $_SESSION['user_id'] ?? null;
-
-$stmt = $pdo->prepare("SELECT firstname, lastname, email, username FROM users WHERE id = :id");
-$stmt->execute(['id' => $user_id]);
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
+$firstname = htmlspecialchars($_SESSION['firstname'] ?? 'Prénom');
+$lastname = htmlspecialchars($_SESSION['lastname'] ?? 'Nom');
+$username = htmlspecialchars($_SESSION['username'] ?? 'Nom utilisateur');
+$email = htmlspecialchars($_SESSION['email'] ?? 'Email');
+$user_initials = strtoupper(substr($_SESSION['firstname'] ?? 'A', 0, 1)) .
+                 strtoupper(substr($_SESSION['lastname'] ?? 'Z', 0, 1));
+                 
 ?>
+
+<?php var_dump($_SESSION['email']); ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -34,86 +38,61 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
       background-color: #FFFFFF;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
       padding: 1rem;
+    }
+    .avatar {
+      background-color: #E85421;
+      color: #fff;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
     }
     .logo {
       height: 40px;
     }
     .content {
-      flex: 1;
-      padding: 1.5rem;
-      text-align: center;
-    }
-    .avatar {
-      background-color: #E85421;
-      color: white;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      margin: 0 auto 1rem;
-    }
-    h2 {
-      margin-bottom: 0.5rem;
-    }
-    p {
-      margin: 0.3rem 0;
-      font-size: 0.95rem;
+      padding: 1rem;
     }
     .btn {
-      margin-top: 1rem;
       background-color: #0E1E5B;
-      color: #fff;
-      border: none;
+      color: white;
       padding: 10px 20px;
       border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-    }
-    footer {
-      background-color: #ffffff;
-      border-top: 1px solid #ccc;
-      padding: 0.5rem;
-      display: flex;
-      justify-content: space-around;
-    }
-    footer a {
-      text-decoration: none;
-      color: #212529;
+      display: block;
+      margin-top: 1rem;
       text-align: center;
-      font-size: 0.9rem;
-    }
-    footer a.active {
-      color: #E85421;
+      text-decoration: none;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <header>
-      <img src="../image/gefor.jpg" alt="Logo Gefor" class="logo">
-    </header>
-    <div class="content">
-      <div class="avatar">
-        <?= strtoupper(substr($user['firstname'], 0, 1)) . strtoupper(substr($user['lastname'], 0, 1)) ?>
+      <header>
+        <div class="avatar"><?= $user_initials ?></div>
+        <img id="gefor" src="../image/gefor.jpg" alt="Logo Gefor" class="logo">
+      </header>
+      <div class="content">
+        <h2><?= strtoupper("$firstname $lastname") ?></h2>
+        <p><b>Nom utilisateur</b><br><?= htmlspecialchars($username) ?></p>
+        <p><b>Email</b><br><?= htmlspecialchars($email) ?></p>
+        <p><b>Mot de passe</b><br>************</p>
+        <a href="modifier_mot_de_passe.php" class="btn">Modifier le mot de passe</a>
       </div>
-      <h2><?= htmlspecialchars(strtoupper($user['firstname'] . ' ' . $user['lastname'])) ?></h2>
-      <p><b>Nom utilisateur</b><br><?= htmlspecialchars($user['username']) ?></p>
-      <p><b>Email</b><br><?= htmlspecialchars($user['email']) ?></p>
-      <p><b>Mot de passe</b><br>************</p>
-      <a href="modifier_mot_de_passe.php" class="btn">Modifier le mot de passe</a>
+
+      <footer>
+        <a href="http://localhost/myproject/emargement/php/dashboard_apprenant_process.php">🏠<br>Accueil</a>
+        <a href="../apprenant/apprenant_calendrier.php">📅<br>Calendrier</a>
+        <a href="../apprenant/apprenant_profil.php">👤<br>Profil</a>
+        <a href="../php/logout.php">🚪<br>Déconnexion</a>
+      </footer>
     </div>
-    <footer>
-      <a href="http://localhost/myproject/emargement/php/dashboard_apprenant_process.php">🏠<br>Accueil</a>
-      <a href="../apprenant/apprenant_calendrier.php">📅<br>Calendrier</a>
-      <a href="../apprenant/apprenant_profil.php">👤<br>Profil</a>
-    </footer>
+
   </div>
 </body>
 </html>

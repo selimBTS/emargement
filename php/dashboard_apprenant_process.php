@@ -13,8 +13,10 @@ requireAuth('apprenant'); // Protection d'accès
 
 // Vérifier que les valeurs de session existent avant d'affecter les variables
 $firstname = htmlspecialchars($_SESSION['firstname'] ?? 'Apprenant');
+$lastname = htmlspecialchars($_SESSION['lastname'] ?? '');
 $user_photo = !empty($_SESSION['user_photo']) ? $_SESSION['user_photo'] : '';
 $user_initials = $_SESSION['user_initials'] ?? 'A';
+
 
 // Connexion à la base de données
 $pdo = connection_bdd();
@@ -124,11 +126,11 @@ require_once(__DIR__ . '/../php/dashboard_apprenant_process.php');
 <body>
   <div class="container">
     <header>
-      <div class="avatar">AK</div>
+    <div class="avatar"><?= htmlspecialchars($user_initials) ?></div>
       <img id="gefor" src="../image/gefor.jpg" alt="Logo Gefor" class="logo">
     </header>
     <div class="content">
-      <h2>Bonjour Apprenant</h2>
+    <h2>Bonjour <?= $firstname . ' ' . $lastname ?></h2>
 
 <button class="btn-justifier" onclick="location.href='<?= BASE_URL ?>/apprenant/apprenant_justifier_absence.php'">
   Justifier une absence
@@ -157,11 +159,14 @@ require_once(__DIR__ . '/../php/dashboard_apprenant_process.php');
         <?php endif; ?>
       </div>
     </div>
-    <footer>
-      <a href="../php/dashboard_apprenant_process.php">🏠<br>Accueil</a>
-      <a href="../apprenant/apprenant_calendrier.php">📅<br>Calendrier</a>
-      <a href="../apprenant/apprenant_profil.php">👤<br>Profil</a>
-    </footer>
+    
+<footer>
+  <a href="../php/dashboard_apprenant_process.php">🏠<br>Accueil</a>
+  <a href="../apprenant/apprenant_calendrier.php">📅<br>Calendrier</a>
+  <a href="../apprenant/apprenant_profil.php">👤<br>Profil</a>
+  <a href="../php/logout.php">🚪<br>Déconnexion</a>
+</footer>
+
   </div>
 </body>
 </html>
