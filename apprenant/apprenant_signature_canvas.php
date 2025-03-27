@@ -102,8 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $feuille_id && $user_id) {
       <p class="message" style="color: green;">✅ Votre signature a été enregistrée.</p>
       <script>
         setTimeout(() => {
-          window.location.href = 'apprenant_dashboard.html'; //modifier la redirection en .php lorsque tt sera bon
-        }, 3000);
+          window.location.href = 'apprenant_dashboard.php'; 
       </script>
     <?php elseif ($erreur_signature): ?>
       <p class="message" style="color: red;">❌ Veuillez resigner.</p>

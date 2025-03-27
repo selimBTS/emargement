@@ -156,9 +156,9 @@ if ($user_id) {
       </div>
     </div>
     <footer>
-      <a href="#" class="active">🏠<br>Accueil</a>
-      <a href="#">📅<br>Calendrier</a>
-      <a href="#">👤<br>Profil</a>
+      <a href="../apprenant/apprenant_dashboard.php">🏠<br>Accueil</a>
+      <a href="../apprenant/apprenant_calendrier.php">📅<br>Calendrier</a>
+      <a href="../apprenant/apprenant_profil.php">👤<br>Profil</a>
     </footer>
   </div>
 </body>
