@@ -15,7 +15,8 @@ requireAuth('apprenant'); // Protection d'accès
 $firstname = htmlspecialchars($_SESSION['firstname'] ?? 'Apprenant');
 $lastname = htmlspecialchars($_SESSION['lastname'] ?? '');
 $user_photo = !empty($_SESSION['user_photo']) ? $_SESSION['user_photo'] : '';
-$user_initials = $_SESSION['user_initials'] ?? 'A';
+$user_initials = strtoupper(substr($_SESSION['firstname'] ?? 'A', 0, 1)) .
+                 strtoupper(substr($_SESSION['lastname'] ?? 'Z', 0, 1));
 
 
 // Connexion à la base de données
@@ -79,6 +80,7 @@ require_once(__DIR__ . '/../php/dashboard_apprenant_process.php');
     }
     .content {
       padding: 1rem;
+  
     }
     .btn-justifier {
       background-color: #0E1E5B;
@@ -106,21 +108,26 @@ require_once(__DIR__ . '/../php/dashboard_apprenant_process.php');
       margin: 0.25rem 0;
     }
     footer {
-      background-color: #ffffff;
-      border-top: 1px solid #ccc;
-      padding: 0.5rem;
-      display: flex;
-      justify-content: space-around;
-    }
-    footer a {
-      text-decoration: none;
-      color: #212529;
-      text-align: center;
-      font-size: 0.9rem;
-    }
-    footer a.active {
-      color: #E85421;
-    }
+  background: white;
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid #ccc;
+}
+
+footer a {
+  text-decoration: none;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #212529;
+}
+
+footer a:nth-child(1) { color: #E85421; } /* Accueil */
+footer a:nth-child(2) { color: #0E1E5B; } /* Calendrier */
+footer a:nth-child(3) { color: #6C63FF; } /* Profil */
+footer a:nth-child(4) { color: #BF360C; } /* Déconnexion */
   </style>
 </head>
 <body>

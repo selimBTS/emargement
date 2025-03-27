@@ -32,7 +32,7 @@ $user_initials = strtoupper(substr($_SESSION['firstname'] ?? 'A', 0, 1)) .
       background-color: #F1F3F5;
       max-width: 600px;
       margin: auto;
-      min-height: 100vh;
+      min-height: 50vh;
       display: flex;
       flex-direction: column;
     }
@@ -59,6 +59,11 @@ $user_initials = strtoupper(substr($_SESSION['firstname'] ?? 'A', 0, 1)) .
     }
     .content {
       padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content:;
+      flex: 1;
     }
     .btn {
       background-color: #0E1E5B;
@@ -71,7 +76,31 @@ $user_initials = strtoupper(substr($_SESSION['firstname'] ?? 'A', 0, 1)) .
       text-decoration: none;
       font-weight: bold;
     }
-  </style>
+  
+footer {
+  background: white;
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid #ccc;
+  margin-bottom: 3%;
+}
+
+footer a {
+  text-decoration: none;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #212529;
+}
+
+footer a:nth-child(1) { color: #E85421; } /* Accueil */
+footer a:nth-child(2) { color: #0E1E5B; } /* Calendrier */
+footer a:nth-child(3) { color: #6C63FF; } /* Profil */
+footer a:nth-child(4) { color: #BF360C; } /* Déconnexion */
+
+</style>
 </head>
 <body>
   <div class="container">
@@ -87,12 +116,22 @@ $user_initials = strtoupper(substr($_SESSION['firstname'] ?? 'A', 0, 1)) .
         <a href="modifier_mot_de_passe.php" class="btn">Modifier le mot de passe</a>
       </div>
 
-      <footer>
-        <a href="http://localhost/myproject/emargement/php/dashboard_apprenant_process.php">🏠<br>Accueil</a>
-        <a href="../apprenant/apprenant_calendrier.php">📅<br>Calendrier</a>
-        <a href="../apprenant/apprenant_profil.php">👤<br>Profil</a>
-        <a href="../php/logout.php">🚪<br>Déconnexion</a>
-      </footer>
+      
+<footer>
+  <a href="../php/dashboard_apprenant_process.php" style="color: #E85421; text-align: center;">
+    🏠<br>Accueil
+  </a>
+  <a href="../apprenant/apprenant_calendrier.php" style="color: #0E1E5B; text-align: center;">
+    📅<br>Calendrier
+  </a>
+  <a href="../apprenant/apprenant_profil.php" style="color: #6C63FF; text-align: center;">
+    👤<br>Profil
+  </a>
+  <a href="../php/logout.php" style="color: #BF360C; text-align: center;">
+    🚪<br>Déconnexion
+  </a>
+</footer>
+
     </div>
 
   </div>
