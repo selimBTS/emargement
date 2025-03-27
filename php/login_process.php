@@ -13,10 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     try {
-        $conn = connection_bdd(); // fonction dans db.php qui utilise config.php
+        $conn = connection_bdd();
 
-        // Requête pour récupérer l'utilisateur
-        $stmt = $conn->prepare("SELECT id, role, password FROM users WHERE username = ?");
+        // Requête complète pour récupérer toutes les infos nécessaires
+        $stmt = $conn->prepare("SELECT id, role, password, firstname, lastname, email, username FROM users WHERE username = ?");
         $stmt->execute([$username]);
         $user = $stmt->fetch();
 
@@ -24,10 +24,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $role = $user['role'];
             $hashedPassword = $user['password'];
 
-            // Vérifier le mot de passe
             if (password_verify($password, $hashedPassword)) {
+                // Stocker les infos dans la session
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['role'] = $role;
+                $_SESSION['firstname'] = $user['firstname'];
+                $_SESSION['lastname'] = $user['lastname'];
+                $_SESSION['email'] = $user['email'];
+                $_SESSION['username'] = $user['username'];
 
                 // Redirection selon le rôle
                 switch ($role) {
@@ -43,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     default:
                         setSessionMessage('error', "Rôle non reconnu.");
                         header("Location: ../index.php");
-                        exit();
+                        break;
                 }
                 exit();
             } else {

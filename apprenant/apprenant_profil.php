@@ -1,11 +1,13 @@
 <?php
 session_start();
-require_once __DIR__ . '/../config.php';
+require_once('../config.php');
+// $pdo est déjà prêt à l’emploi
+
 
 $firstname = htmlspecialchars($_SESSION['firstname'] ?? 'Prénom');
 $lastname = htmlspecialchars($_SESSION['lastname'] ?? 'Nom');
 $username = htmlspecialchars($_SESSION['username'] ?? 'Nom utilisateur');
-$email = htmlspecialchars($_SESSION['email'] ?? 'Email');
+$email = htmlspecialchars($_SESSION['email'] ?? 'Non défini');
 $user_initials = strtoupper(substr($_SESSION['firstname'] ?? 'A', 0, 1)) .
                  strtoupper(substr($_SESSION['lastname'] ?? 'Z', 0, 1));
                  

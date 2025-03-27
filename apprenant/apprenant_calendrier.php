@@ -1,11 +1,12 @@
 <?php
 session_start();
-require_once __DIR__ . '/../config.php';
+require_once('../config.php');
 
-// Exemple temporaire d'utilisateur connecté
-$_SESSION['user_id'] = 9; // À remplacer par le vrai ID en production
-
+// Variables de session
 $user_id = $_SESSION['user_id'] ?? null;
+$user_initials = strtoupper(substr($_SESSION['firstname'] ?? 'A', 0, 1)) .
+                 strtoupper(substr($_SESSION['lastname'] ?? 'Z', 0, 1));
+
 $cours_aujourdhui = [];
 $cours_passes = [];
 
@@ -33,6 +34,9 @@ if ($user_id) {
         }
     }
 }
+?>
+
+
 ?>
 
 <!DOCTYPE html>
