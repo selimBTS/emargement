@@ -1,3 +1,5 @@
+// Debut calendrier dynamique
+
 document.addEventListener("DOMContentLoaded", () => {
   const calendar = document.getElementById("calendar");
   const monthLabel = document.getElementById("month-label");
@@ -69,3 +71,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   generateCalendar(currentDate.getMonth(), currentDate.getFullYear());
 });
+
+// Fin calendrier dynamique
+
