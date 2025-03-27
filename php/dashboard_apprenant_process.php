@@ -1,39 +1,38 @@
 <?php
-session_start();
-require_once __DIR__ . '/../config.php';
+require_once(__DIR__ . '/session.php');
+require_once(__DIR__ . '/db.php');
+require_once(__DIR__ . '/functions.php');
+require_once(__DIR__ . '/auth.php'); // Ajout pour protéger l'accès
 
-// Exemple temporaire d'utilisateur connecté
-$_SESSION['user_id'] = 9; // À remplacer par le vrai ID en production
+// Vérifier si l'utilisateur est connecté et a le rôle apprenant
+requireAuth('apprenant'); // Protection d'accès
 
-$user_id = $_SESSION['user_id'] ?? null;
-$cours_aujourdhui = [];
-$cours_passes = [];
+// Charger les informations de l'utilisateur
+// (Décommenter si la fonction existe dans functions.php)
+// loadUserData();
 
-if ($user_id) {
-    $stmt = $pdo->prepare("
-        SELECT f.nom AS formation, s.nom AS salle, f.date_debut, f.date_fin
-        FROM feuilles_emargements f
-        JOIN salles s ON f.salle_id = s.id
-        JOIN feuilles_emargements_signatures fs ON fs.feuille_id = f.id
-        WHERE fs.user_id = :user_id
-        ORDER BY f.date_debut DESC
-    ");
-    $stmt->execute(['user_id' => $user_id]);
-    $resultats = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// Vérifier que les valeurs de session existent avant d'affecter les variables
+$firstname = htmlspecialchars($_SESSION['firstname'] ?? 'Apprenant');
+$user_photo = !empty($_SESSION['user_photo']) ? $_SESSION['user_photo'] : '';
+$user_initials = $_SESSION['user_initials'] ?? 'A';
 
-    foreach ($resultats as $cours) {
-        $debut = new DateTime($cours['date_debut']);
-        $fin = new DateTime($cours['date_fin']);
-        $now = new DateTime();
+// Connexion à la base de données
+$pdo = connection_bdd();
 
-        if ($debut->format('Y-m-d') === $now->format('Y-m-d') && $fin > $now) {
-            $cours_aujourdhui[] = $cours;
-        } elseif ($fin < $now) {
-            $cours_passes[] = $cours;
-        }
-    }
-}
+// Récupérer les statistiques via des fonctions réutilisables
+$apprenants = getTotalUsersByRole($pdo, 'apprenant');
+$formateurs = getTotalUsersByRole($pdo, 'formateur');
+$emargements = getTotalEmargements($pdo);
+$emargementsToday = getFeuillesEmargementsToday($pdo);
+
+// Générer la date actuelle
+$current_date = date('d/m/Y');
+
+// Charger le contenu HTML du tableau de bord
+require_once(__DIR__ . '/../php/dashboard_apprenant_process.php');
 ?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -159,7 +158,7 @@ if ($user_id) {
       </div>
     </div>
     <footer>
-      <a href="../apprenant/apprenant_dashboard.php">🏠<br>Accueil</a>
+      <a href="../php/dashboard_apprenant_process.php">🏠<br>Accueil</a>
       <a href="../apprenant/apprenant_calendrier.php">📅<br>Calendrier</a>
       <a href="../apprenant/apprenant_profil.php">👤<br>Profil</a>
     </footer>

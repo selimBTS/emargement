@@ -1,6 +1,6 @@
 <?php
-require_once "session.php"; // Gestion des sessions
-require_once "db.php"; // Connexion à la base de données
+require_once __DIR__ . "/session.php";       // Gestion des sessions
+require_once __DIR__ . "/db.php";            // Connexion à la base de données
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username']);
@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     try {
-        $conn = connection_bdd(); 
+        $conn = connection_bdd(); // fonction dans db.php qui utilise config.php
 
         // Requête pour récupérer l'utilisateur
         $stmt = $conn->prepare("SELECT id, role, password FROM users WHERE username = ?");
@@ -26,23 +26,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Vérifier le mot de passe
             if (password_verify($password, $hashedPassword)) {
-                // Stocker les informations de l'utilisateur dans la session
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['role'] = $role;
-
-                // Charger les données utilisateur
-                loadUserData();
 
                 // Redirection selon le rôle
                 switch ($role) {
                     case 'apprenant':
-                        header('Location: dashboard_apprenant.php');
+                        header('Location: dashboard_apprenant_process.php');
                         break;
                     case 'admin':
                         header('Location: dashboard_admin_process.php');
                         break;
                     case 'formateur':
-                        header('Location: dashboard_formateur.php');
+                        header('Location: dashboard_formateur_process.php');
                         break;
                     default:
                         setSessionMessage('error', "Rôle non reconnu.");

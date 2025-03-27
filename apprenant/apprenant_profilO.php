@@ -110,7 +110,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
       <a href="modifier_mot_de_passe.php" class="btn">Modifier le mot de passe</a>
     </div>
     <footer>
-      <a href="http://localhost/myproject/emargement/php/dashboard_apprenant_process.php">🏠<br>Accueil</a>
+      <a href="../apprenant/dashboard_apprenant_process.php">🏠<br>Accueil</a>
       <a href="../apprenant/apprenant_calendrier.php">📅<br>Calendrier</a>
       <a href="../apprenant/apprenant_profil.php">👤<br>Profil</a>
     </footer>

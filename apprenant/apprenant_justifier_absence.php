@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'bdd.php';
+require_once __DIR__ . '/../config.php';
 
 // Traitement du formulaire (à compléter avec insertion en base si souhaité)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accept'])) {

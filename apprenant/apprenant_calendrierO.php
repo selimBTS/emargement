@@ -152,7 +152,7 @@ if ($user_id) {
     <table class="calendar" id="calendar"></table>
 
     <footer>
-      <a href="http://localhost/myproject/emargement/php/dashboard_apprenant_process.php">🏠<br>Accueil</a>
+      <a href="../apprenant/dashboard_apprenant_process.php">🏠<br>Accueil</a>
       <a href="../apprenant/apprenant_calendrier.php">📅<br>Calendrier</a>
       <a href="../apprenant/apprenant_profil.php">👤<br>Profil</a>
     </footer>

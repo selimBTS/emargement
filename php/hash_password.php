@@ -3,8 +3,8 @@
 if (isset($_POST['password'])) {
     $password = trim($_POST['password']); // Récupération et nettoyage du mot de passe
     
-    if (strlen($password) < 8) {
-        echo "Le mot de passe doit contenir au moins 8 caractères.";
+    if (strlen($password) < 2) {
+        echo "Le mot de passe doit contenir au moins 2 caractères.";
         exit();
     }
 
